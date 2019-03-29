@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>HUI </title>
+<link rel="stylesheet" type="text/css" href="H-ui/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="HUI-master/css/hui.css" />
+	<style type="text/css">
+		.Huifold .item{ position:relative}
+.Huifold .item h4{margin:0;font-weight:bold;position:relative;border-top: 1px solid #fff;font-size:15px;line-height:22px;padding:7px 10px;background-color:#eee;cursor:pointer;padding-right:30px}
+.Huifold .item h4 b{position:absolute;display: block; cursor:pointer;right:10px;top:7px;width:16px;height:16px; text-align:center; color:#666}
+.Huifold .item .info{display:none;padding:10px}
+	</style>
+</head>
+<body>
+<header class="hui-header">
+    <div id="hui-back"></div>
+    <h1>HUI </h1>
+    <div id="hui-header-menu" onclick="hui.showSlideMenu();"></div>
+</header>
+<div class="hui-wrap">
+    <div class="hui-center-title" style="margin-top:15px;"><h1>侧滑菜单演示</h1></div>
+    <div style="padding:32px; line-height:2em;">
+        请点击导航右侧的菜单按钮或者向左滑动体验 ^_^
+    </div>
+</div>
+<div class="hui-slide-menu">
+	
+    <ul>
+        <li>菜单1</li>
+        <li>菜单2</li>
+        <li>菜单3</li>
+        <li>菜单4</li>
+		<ul id="Huifold1" class="Huifold">
+		  <li class="item">
+			<h4>标题<b>+</b></h4>
+			<div class="info"> 内容<br>很多内容 </div>
+		  </li>
+		  <li class="item">
+			<h4>标题<b>+</b></h4>
+			<div class="info"><img src="pic/2.png" ></div>
+		  </li>
+		  <li class="item">
+			<h4>标题<b>+</b></h4>
+			<div class="info"><img src="pic/1.png" ></div>
+		  </li>
+		</ul>
+		
+        <li style="padding-top:30px;">
+            <button type="button" class="hui-button hui-button-large" onclick="hui.closeSlideMenu();">关闭菜单</button>
+        </li>
+    </ul>
+</div>
+
+
+
+<div id="hui-footer">
+    <a href="javascript:hui.back();" id="nav-home">
+        <div class="hui-footer-icons hui-icons-home"></div>
+        <div class="hui-footer-text">首页</div>
+    </a>
+    <a href="javascript:hui.toast('新闻');" id="nav-news">
+        <div class="hui-footer-icons hui-icons-news"></div>
+        <div class="hui-footer-text">新闻</div>
+    </a>
+    <div style="width:20%; text-align:center;" class="hui-fl">
+        <img src="../img/logo_footer.png" height="44" onclick="hui.back();" />
+    </div>
+    <a href="javascript:hui.toast('社区');" id="nav-forum">
+        <div class="hui-footer-icons hui-icons-forum"></div>
+        <div class="hui-footer-text">社区</div>
+    </a>
+    <a href="javascript:hui.toast('我的');" id="nav-my">
+        <div class="hui-footer-icons hui-icons-my"></div>
+        <div class="hui-footer-text">我的</div>
+    </a>
+</div>
+
+
+
+<script type="text/javascript" src="HUI-master/js/hui.js" charset="UTF-8"></script>
+<script type="text/javascript" src="H-ui/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	/* slide menu */
+	hui.slideMenu();
+		
+	
+	jQuery.Huifold = function(obj,obj_c,speed,obj_type,Event){
+	if(obj_type == 2){
+		$(obj+":first").find("b").html("-");
+		$(obj_c+":first").show()}
+	$(obj).bind(Event,function(){
+		if($(this).next().is(":visible")){
+			if(obj_type == 2){
+				return false}
+			else{
+				$(this).next().slideUp(speed).end().removeClass("selected");
+				$(this).find("b").html("+")}
+		}
+		else{
+			if(obj_type == 3){
+				$(this).next().slideDown(speed).end().addClass("selected");
+				$(this).find("b").html("-")}else{
+				$(obj_c).slideUp(speed);
+				$(obj).removeClass("selected");
+				$(obj).find("b").html("+");
+				$(this).next().slideDown(speed).end().addClass("selected");
+				$(this).find("b").html("-")}
+		}
+	})}
+		
+	$(function(){
+		$.Huifold("#Huifold1 .item h4","#Huifold1 .item .info","fast",1,"click"); /*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
+	});
+</script>
+</body>
+</html>
